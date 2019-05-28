@@ -1,15 +1,84 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+	<title>Rock Paper Scissors</title>
+  <style>
+  	button {
+  		margin-left: 45%;
+  		margin-right: 45%;
+  		margin-top: 100px;
+  		width: 100px;
+  		height: 40px;
+  		border-radius: 5px;
+  	}
+  </style>
 </head>
 <body>
-  <script>
-    
-    
-
-    
-    }
-  </script>
+	<button type="button" onclick="game()">Start</button>
+	<script type="text/javascript">
+		function randomNumber(max) {
+			return Math.floor(Math.random() * max);
+		}
+		function computerPlay() {
+			let computerOptions = ["rock", "paper", "scissors"]; // 0, 1, 2
+			let computerChoice = computerOptions[randomNumber(3)];
+			return computerChoice;
+		}
+		function playerSelection(){
+			let playerChoice = prompt("What do you choose? Rock/ Paper/ Scissors");
+			return playerChoice.toLowerCase();
+		}
+		let rounds = 0;
+		let wins = 0;
+		function oneRound() {
+			let playerChoice = playerSelection();
+			let computerChoice = computerPlay();
+			if (playerChoice === "rock" && computerChoice === "paper") {
+				alert("Computer played paper. You lost!");
+			} else if (playerChoice === "rock" && computerChoice === "scissors") {
+				alert("Computer played scissors. You win!");
+				wins ++;
+			} else if (playerChoice === "scissors" && computerChoice === "paper") {
+				alert("Computer played paper. You win!");
+				wins ++;
+			} else if (playerChoice === "scissors" && computerChoice === "rock") {
+				alert("Computer played rock. You lost!");
+			} else if (playerChoice === "paper" && computerChoice === "rock") {
+				alert("Computer played rock. You win!");
+				wins ++;
+			} else if (playerChoice === "paper" && computerChoice === "scissors") {
+				alert("Computer played scissors. You lost!");
+			} else if (playerChoice === computerChoice) {
+				alert("It is a tie! Choose again.");
+				oneRound();
+				rounds --;
+			} else if (playerChoice === null) {
+				alert("Choose either rock, paper, or scissors.");
+				oneRound();
+				rounds --;
+			} else {
+				alert("Choose either rock, paper, or scissors.");
+				oneRound();
+				rounds --;
+			} 
+			rounds ++;
+		}
+		function game () {
+			while (rounds < 5) {
+				oneRound();
+			}
+			if (wins < 3) {
+				alert("You won " + wins + " times out of 5 rounds. You lost this game! Please click the button to retry.");
+				rounds = 0;
+				wins = 0;
+			} else {
+				alert("You won " + wins + " times out of 5 rounds. Congrats, you won this game!! Please click the button to play again.");
+				rounds = 0;
+				wins = 0;
+			}
+		}
+	</script>
 </body>
 </html>
+
